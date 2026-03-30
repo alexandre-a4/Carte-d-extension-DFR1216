@@ -1,29 +1,21 @@
 //% color=#2E8B57
-enum Motor {
-    //% block="M1 A"
-    M1A = 0,
-    //% block="M1 B"
-    M1B,
-    //% block="M2 A"
-    M2A,
-    //% block="M2 B"
-    M2B,
-    //% block="M3 A"
-    M3A,
-    //% block="M3 B"
-    M3B,
-    //% block="M4 A"
-    M4A,
-    //% block="M4 B"
-    M4B
+enum MotorID {
+    //% block="motor 1"
+    M1 = 0,
+    //% block="motor 2"
+    M2,
+    //% block="motor 3"
+    M3,
+    //% block="motor 4"
+    M4
 }
 
 //% color=#2E8B57
 enum MotorDirection {
-    //% block="forward"
-    Forward = 0,
-    //% block="backward"
-    Backward = 1
+    //% block="clockwise"
+    CW = 0,
+    //% block="counter-clockwise"
+    CCW = 1
 }
 
 //% color=#1E90FF
@@ -52,4 +44,14 @@ enum GPIOState {
     Low = 0,
     //% block="HIGH"
     High = 1
+}
+
+//% color=#FF1493
+enum RGBIndex {
+    //% block="RGB0"
+    RGB0 = 0,
+    //% block="RGB1"
+    RGB1 = 1,
+    //% block="both"
+    Both = 2
 }
