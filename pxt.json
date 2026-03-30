@@ -1,0 +1,17 @@
+{
+  "name": "Carte-d-extension-DFR1216",
+  "version": "0.0.1",
+  "description": "Extension MakeCode pour la carte DFRobot Unihiker Expansion (DFR1216)",
+  "dependencies": {
+    "core": "*"
+  },
+  "files": [
+    "unihiker.ts",
+    "enums.ts"
+  ],
+  "testFiles": [],
+  "public": true,
+  "supportedTargets": [
+    "microbit"
+  ]
+}
