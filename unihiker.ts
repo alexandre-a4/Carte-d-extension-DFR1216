@@ -134,8 +134,8 @@ namespace unihiker {
         buf[1] = globalBrightness
 
         function setColor(offset: number) {
-            buf[offset] = g
-            buf[offset + 1] = r
+            buf[offset] = r
+            buf[offset + 1] = g
             buf[offset + 2] = b
         }
 
@@ -164,6 +164,28 @@ namespace unihiker {
         setRGB(RGBIndex.Both, 0, 0, 0)
     }
 
+    //% block="set %index color %color"
+//% group="RGB"
+export function setRGBColor(index: RGBIndex, color: RGBColor) {
+
+    let r = 0
+    let g = 0
+    let b = 0
+
+    switch (color) {
+        case RGBColor.Red: r = 255; break
+        case RGBColor.Green: g = 255; break
+        case RGBColor.Blue: b = 255; break
+        case RGBColor.Yellow: r = 255; g = 255; break
+        case RGBColor.Cyan: g = 255; b = 255; break
+        case RGBColor.Magenta: r = 255; b = 255; break
+        case RGBColor.White: r = 255; g = 255; b = 255; break
+        case RGBColor.Off: default: break
+    }
+
+    setRGB(index, r, g, b)
+}
+    
     // =========================
     // 🔘 GPIO
     // =========================
