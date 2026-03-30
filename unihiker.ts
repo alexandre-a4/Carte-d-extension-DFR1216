@@ -151,6 +151,28 @@ namespace unihiker {
         writeReg(0x90, buf)
     }
 
+    //% block="set %index color %color"
+    //% group="RGB"
+    export function setRGBColor(index: RGBIndex, color: RGBColor) {
+
+        let r = 0
+        let g = 0
+        let b = 0
+
+        switch (color) {
+            case RGBColor.Red: r = 255; break
+            case RGBColor.Green: g = 255; break
+            case RGBColor.Blue: b = 255; break
+            case RGBColor.Yellow: r = 255; g = 255; break
+            case RGBColor.Cyan: g = 255; b = 255; break
+            case RGBColor.Magenta: r = 255; b = 255; break
+            case RGBColor.White: r = 255; g = 255; b = 255; break
+            case RGBColor.Off: default: break
+        }
+
+        setRGB(index, r, g, b)
+    }
+
     //% block="set RGB brightness %b"
     //% b.min=0 b.max=255
     //% group="RGB"
@@ -164,50 +186,19 @@ namespace unihiker {
         setRGB(RGBIndex.Both, 0, 0, 0)
     }
 
-    //% block="set %index color %color"
-//% group="RGB"
-export function setRGBColor(index: RGBIndex, color: RGBColor) {
-
-    let r = 0
-    let g = 0
-    let b = 0
-
-    switch (color) {
-        case RGBColor.Red: r = 255; break
-        case RGBColor.Green: g = 255; break
-        case RGBColor.Blue: b = 255; break
-        case RGBColor.Yellow: r = 255; g = 255; break
-        case RGBColor.Cyan: g = 255; b = 255; break
-        case RGBColor.Magenta: r = 255; b = 255; break
-        case RGBColor.White: r = 255; g = 255; b = 255; break
-        case RGBColor.Off: default: break
-    }
-
-    setRGB(index, r, g, b)
-}
-    
     // =========================
-    // 🔘 GPIO
+    // 🔘 GPIO (AUTO CONFIG)
     // =========================
 
-    //% block="set %io as digital output"
-    //% group="GPIO"
-    export function setDigitalOutput(io: IO) {
-        init()
-        writeReg(0x2c + io, pins.createBufferFromArray([4]))
-    }
-
-    //% block="set %io as digital input"
-    //% group="GPIO"
-    export function setDigitalInput(io: IO) {
-        init()
-        writeReg(0x2c + io, pins.createBufferFromArray([5]))
+    function setAnalogInput(io: IO) {
+        writeReg(0x2c + io, pins.createBufferFromArray([2]))
     }
 
     //% block="digital write %io to %state"
     //% group="GPIO"
     export function digitalWrite(io: IO, state: GPIOState) {
         init()
+        setDigitalOutput(io)
         writeReg(0x39 + io, pins.createBufferFromArray([state]))
     }
 
@@ -218,7 +209,7 @@ export function setRGBColor(index: RGBIndex, color: RGBColor) {
         init()
 
         setDigitalInput(io)
-        basic.pause(20)
+        basic.pause(10)
 
         return readReg(0x3f + io, 1)[0]
     }
@@ -227,8 +218,19 @@ export function setRGBColor(index: RGBIndex, color: RGBColor) {
     //% group="GPIO"
     export function analogRead(io: IO): number {
         init()
+
+        setAnalogInput(io)
+
         let buf = readReg(0x45 + io * 3, 3)
         return (buf[1] << 8) | buf[2]
+    }
+
+    function setDigitalOutput(io: IO) {
+        writeReg(0x2c + io, pins.createBufferFromArray([4]))
+    }
+
+    function setDigitalInput(io: IO) {
+        writeReg(0x2c + io, pins.createBufferFromArray([5]))
     }
 
     // =========================
