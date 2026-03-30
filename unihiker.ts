@@ -1,5 +1,5 @@
 //% weight=100 color=#0fbc11 icon="\uf085"
-namespace unihiker {
+namespace a4_DFR1216 {
 
     const I2C_ADDR = 0x33
 
