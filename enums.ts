@@ -55,3 +55,23 @@ enum RGBIndex {
     //% block="both"
     Both = 2
 }
+
+//% color=#FF1493
+enum RGBColor {
+    //% block="red"
+    Red,
+    //% block="green"
+    Green,
+    //% block="blue"
+    Blue,
+    //% block="yellow"
+    Yellow,
+    //% block="cyan"
+    Cyan,
+    //% block="magenta"
+    Magenta,
+    //% block="white"
+    White,
+    //% block="off"
+    Off
+}
