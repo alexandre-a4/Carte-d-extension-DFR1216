@@ -32,7 +32,7 @@ namespace a4_DFR1216 {
     // 🔋 SYSTEM
     // =========================
 
-    //% block="battery level (%)"
+    //% block="battery level (\\%)"
     //% group="System"
     export function getBattery(): number {
         init()
